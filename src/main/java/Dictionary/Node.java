@@ -6,6 +6,7 @@ public class Node {
     ArrayList<Node>letters =new ArrayList<Node>(Collections.nCopies(26, null));
     private Node father;
     private Boolean finalLetter;
+    private Integer frequency = 0;
 
     public Character getLetter() {
         return letter;
