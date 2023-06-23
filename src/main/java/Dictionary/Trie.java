@@ -47,7 +47,7 @@ public class Trie {
         Stack<Character> characters = new Stack<>();
         print(this.root , characters);
     }
-    Boolean isExist(String word){
+    static Boolean isExist(String word){
         Node root = this.root;
         for (int i = 0; i < word.length(); i++) {
             int index = word.charAt(i);
