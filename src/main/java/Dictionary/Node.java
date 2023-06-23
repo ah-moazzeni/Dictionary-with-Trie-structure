@@ -12,6 +12,10 @@ public class Node {
         return frequency;
     }
 
+    public void updateFrequency() {
+        this.frequency++;
+    }
+
     public Character getLetter() {
         return letter;
     }

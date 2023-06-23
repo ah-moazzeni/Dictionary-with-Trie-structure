@@ -30,11 +30,16 @@ public class AutoComplete {
                     temp+=(characters.stream()
                             .map(String::valueOf)
                             .collect(Collectors.joining()));
-                    PossibleWords.add(temp);
+                    if(!PossibleWords.contains(temp))
+                        PossibleWords.add(temp);
                     if(!PrioritizeWords.containsKey(i.getFrequency())){
                         PrioritizeWords.put(i.getFrequency(), new ArrayList<>());
                     }
-                    PrioritizeWords.get(i.getFrequency()).add(temp);
+                    if(!PrioritizeWords.get(i.getFrequency()).contains(temp)) {
+                        PrioritizeWords.get(i.getFrequency()).add(temp);
+                        if(i.getFrequency()>0)
+                            PrioritizeWords.get(i.getFrequency()-1).remove(temp);
+                    }
 //                    if(PrioritizeWords.containsKey(i.getFrequency())){
 //                        PrioritizeWords.get(i.getFrequency()).add(temp);
 //                    }else {
