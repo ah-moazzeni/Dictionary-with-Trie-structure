@@ -57,6 +57,7 @@ public class Trie {
                 return 0;
             }
             if (i == word.length() - 1 && root.letters.get(index).getFinalLetter() ) {
+                root.letters.get(index).updateFrequency();
                 return 2;
             }
 

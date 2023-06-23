@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class TrieGUI {
-    public static void firstScene(Stage stage){
+    public static void mainScene(Stage stage){
         VBox root = new VBox();
         Scene scene = new Scene(root, 400, 700);
 
@@ -33,13 +33,22 @@ public class TrieGUI {
             int temp = Main.originalTrie.isExist(newValue);
             System.out.println(temp);
             if(temp == 0){
+//                AutoComplete.getLastNode("appl");
+//                System.out.println(AutoComplete.PossibleWords);
+//                System.out.println(AutoComplete.PrioritizeWords);
                 scene.getStylesheets().clear();
                 scene.getStylesheets().add("styleError.css");
                 //phase3
             }else if(temp == 1){
+//                AutoComplete.getLastNode("appl");
+//                System.out.println(AutoComplete.PossibleWords);
+//                System.out.println(AutoComplete.PrioritizeWords);
                 scene.getStylesheets().clear();
                 //phase2
             }else if(temp == 2){
+//                AutoComplete.getLastNode("appl");
+//                System.out.println(AutoComplete.PossibleWords);
+//                System.out.println(AutoComplete.PrioritizeWords);
                 scene.getStylesheets().clear();
                 scene.getStylesheets().add("styleSuccess.css");
                 //phase2
