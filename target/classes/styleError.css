@@ -1,0 +1,4 @@
+.text-field{
+    -fx-underline: true;
+    -fx-text-fill: red;
+}
