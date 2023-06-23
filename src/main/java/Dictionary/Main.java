@@ -11,6 +11,7 @@ public class Main extends Application{
     static ArrayList<String> words =  FileHandling.readFromFile();
     public static void main(String[] args) {
         for(String word:words){
+            word=word.toLowerCase();
             originalTrie.addWord(word);
             String reversedWord = "";
             Character ch;
@@ -25,7 +26,6 @@ public class Main extends Application{
         originalTrie.printAllTrie();
         reversedTrie.printAllTrie();
         System.out.println(originalTrie.isExist("a"));
-
         launch(args);
     }
 

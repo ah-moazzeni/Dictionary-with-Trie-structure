@@ -58,7 +58,7 @@ public class TrieGUI {
         submitButton.setTooltip(new Tooltip("Click"));
         submitButton.setId("submitID");
          */
-        
+
 //        submitButton.setStyle("-fx-background-color: #0027ff;-fx-text-fill: #ff0000;");
 
         // background-color:black

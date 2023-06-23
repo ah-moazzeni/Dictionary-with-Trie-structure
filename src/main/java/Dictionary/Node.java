@@ -8,6 +8,10 @@ public class Node {
     private Boolean finalLetter;
     private Integer frequency = 0;
 
+    public Integer getFrequency() {
+        return frequency;
+    }
+
     public Character getLetter() {
         return letter;
     }
