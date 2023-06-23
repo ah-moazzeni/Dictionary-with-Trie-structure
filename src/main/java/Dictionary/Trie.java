@@ -10,6 +10,10 @@ public class Trie {
 
         for (int i = 0; i < word.length(); i++) {
             int index =word.charAt(i);
+            if(Character.isUpperCase(word.charAt(i))){
+                index+=32;
+            }
+
             index-=97;
             Boolean finalLetter = false;
             if (i==word.length()-1){
