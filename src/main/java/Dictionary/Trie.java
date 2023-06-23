@@ -47,20 +47,20 @@ public class Trie {
         Stack<Character> characters = new Stack<>();
         print(this.root , characters);
     }
-    static Boolean isExist(String word){
+    int isExist(String word){
         Node root = this.root;
         for (int i = 0; i < word.length(); i++) {
             int index = word.charAt(i);
             index -= 97;
             Boolean finalLetter = false;
-            if (i == word.length() - 1) {
-                finalLetter = true;
+            if (i == word.length() - 1 && root.getFinalLetter() ) {
+                return 2;
             }
             if (root.letters.get(index) == null) {
-                return false;
+                return 0;
             }
             root = root.letters.get(index);
         }
-        return true;
+        return 1;
     }
 }
