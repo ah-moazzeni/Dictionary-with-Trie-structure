@@ -24,13 +24,14 @@ public class Main extends Application{
 
         originalTrie.printAllTrie();
         reversedTrie.printAllTrie();
+        System.out.println(originalTrie.isExist("a"));
 
         launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-//        stage.show();
+        stage.show();
         TrieGUI.firstScene(stage);
     }
 }

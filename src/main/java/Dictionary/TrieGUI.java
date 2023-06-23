@@ -30,13 +30,17 @@ public class TrieGUI {
 
         ////////////////////////////
         wordTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            int temp = Trie.isExist(newValue);
+            int temp = Main.originalTrie.isExist(newValue);
+            System.out.println(temp);
             if(temp == 0){
+                scene.getStylesheets().clear();
                 scene.getStylesheets().add("styleError.css");
                 //phase3
             }else if(temp == 1){
+                scene.getStylesheets().clear();
                 //phase2
             }else if(temp == 2){
+                scene.getStylesheets().clear();
                 scene.getStylesheets().add("styleSuccess.css");
                 //phase2
             }

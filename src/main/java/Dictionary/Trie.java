@@ -53,12 +53,13 @@ public class Trie {
             int index = word.charAt(i);
             index -= 97;
             Boolean finalLetter = false;
-            if (i == word.length() - 1 && root.getFinalLetter() ) {
-                return 2;
-            }
             if (root.letters.get(index) == null) {
                 return 0;
             }
+            if (i == word.length() - 1 && root.letters.get(index).getFinalLetter() ) {
+                return 2;
+            }
+
             root = root.letters.get(index);
         }
         return 1;
