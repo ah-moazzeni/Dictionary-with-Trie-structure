@@ -1,7 +1,8 @@
 package Dictionary;
+import java.io.Serializable;
 import java.util.Stack;
 import java.util.stream.Collectors;
-public class Trie {
+public class Trie implements Serializable {
     Node root = new Node('.',false,null);
 
 

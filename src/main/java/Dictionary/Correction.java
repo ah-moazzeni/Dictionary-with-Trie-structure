@@ -111,7 +111,7 @@ public class Correction {
             if (i == 4) {break;}
         }
         int size = res.size();
-        System.out.println(result);
+//        System.out.println(result);
         if(size<5){
             res.clear();
             findLongestPrefix(word, Main.originalTrie, res, false,true);
