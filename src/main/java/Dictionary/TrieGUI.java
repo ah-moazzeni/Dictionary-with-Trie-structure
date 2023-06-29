@@ -34,63 +34,27 @@ public class TrieGUI {
 
         Label tempLabel = new Label();
 
-        ////////////////////////////
         wordTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             newValue = newValue.toLowerCase();
             int temp = Main.originalTrie.isExist(newValue);
             if(temp == 0){
-//                System.out.println("phase 3: " + Correction.correctionSuggestion(newValue));
                 tempLabel.setText(ListToString(Correction.correctionSuggestion(newValue), temp));
                 scene.getStylesheets().clear();
                 scene.getStylesheets().add("styleError.css");
-                //phase3
             }else if(temp == 1){
                 tempLabel.setText("");
                 if(!newValue.equals("")) {
                     AutoComplete.getLastNode(newValue);
-//                    System.out.println(AutoComplete.PossibleWords);
-//                    System.out.println(AutoComplete.PrioritizeWords);
-//                    System.out.println(AutoComplete.fiveRecentWords());
                     tempLabel.setText(ListToString(AutoComplete.fiveRecentWords(), temp));
                 }
                 scene.getStylesheets().clear();
-                //phase2
             }else if(temp == 2){
                 AutoComplete.getLastNode(newValue);
-//                System.out.println(AutoComplete.PossibleWords);
-//                System.out.println(AutoComplete.PrioritizeWords);
-//                System.out.println(AutoComplete.fiveRecentWords());
                 tempLabel.setText(ListToString(AutoComplete.fiveRecentWords(), temp));
                 scene.getStylesheets().clear();
                 scene.getStylesheets().add("styleSuccess.css");
-                //phase2
             }
-//            System.out.println("textfield changed from " + oldValue + " to " + newValue);
         });
-
-        /*
-        Button temp = new Button("Don't Click");
-        temp.setId("tempID");
-
-        Button submitButton = new Button("Submit");
-        submitButton.setCursor(Cursor.HAND);
-        submitButton.setTooltip(new Tooltip("Click"));
-        submitButton.setId("submitID");
-         */
-
-//        submitButton.setStyle("-fx-background-color: #0027ff;-fx-text-fill: #ff0000;");
-
-        // background-color:black
-
-
-//        button.setMaxSize(100, 200);
-        /*
-        submitButton.setOnAction(actionEvent -> {
-//            tempLabel.setText(wordTextField.getText());
-            System.out.println(wordTextField.getText());
-            wordTextField.setText("");
-        });
-         */
 
         HBox wordHBox = new HBox(wordLabel, wordTextField);
         wordHBox.setAlignment(Pos.CENTER);
@@ -100,7 +64,6 @@ public class TrieGUI {
 
 
         root.getChildren().setAll(wordHBox, tempLabel);
-//        root.getChildren().setAll(wordHBox, submitButton, tempLabel, temp);
         root.setAlignment(Pos.CENTER);
         root.setSpacing(15);
 
