@@ -1,7 +1,8 @@
 package Dictionary;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.*;
-public class Node {
+public class Node implements Serializable {
     private Character letter;
     ArrayList<Node>letters =new ArrayList<Node>(Collections.nCopies(26, null));
     private Node father;
