@@ -35,10 +35,6 @@ public class Main extends Application{
                 throw new RuntimeException(e);
             }
 
-
-
-//
-//
 //        for(String word:words){
 //            word=word.toLowerCase();
 //            originalTrie.addWord(word);
@@ -52,9 +48,9 @@ public class Main extends Application{
 //            reversedTrie.addWord(reversedWord);
 //        }
 //
-        originalTrie.printAllTrie();
-        reversedTrie.printAllTrie();
-//        System.out.println(Correction.correctionSuggestion("dian"));
+
+//        originalTrie.printAllTrie();
+//        reversedTrie.printAllTrie();
         launch(args);
 
 
