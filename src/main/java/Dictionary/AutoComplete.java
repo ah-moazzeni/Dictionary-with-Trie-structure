@@ -1,8 +1,6 @@
 package Dictionary;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AutoComplete {
@@ -12,6 +10,8 @@ public class AutoComplete {
 
     public static void getLastNode(String prefix){
         pre = prefix;
+        PossibleWords.clear();
+        PrioritizeWords.clear();
         Node temp = Main.originalTrie.root;
 
         for(int i=0;i<prefix.length();i++)
@@ -37,8 +37,8 @@ public class AutoComplete {
                     }
                     if(!PrioritizeWords.get(i.getFrequency()).contains(temp)) {
                         PrioritizeWords.get(i.getFrequency()).add(temp);
-                        if(i.getFrequency()>0)
-                            PrioritizeWords.get(i.getFrequency()-1).remove(temp);
+//                        if(i.getFrequency()>0)
+//                            PrioritizeWords.get(i.getFrequency()-1).remove(temp);
                     }
 //                    if(PrioritizeWords.containsKey(i.getFrequency())){
 //                        PrioritizeWords.get(i.getFrequency()).add(temp);
@@ -50,5 +50,98 @@ public class AutoComplete {
                 characters.pop();
             }
         }
+    }
+
+    static ArrayList<String> fiveRecentWords(){
+        ArrayList<String> result = new ArrayList<>();
+        boolean flag = false;
+
+
+        List<Integer> keys = new ArrayList<>(PrioritizeWords.keySet());
+        ListIterator<Integer> itr = keys.listIterator(keys.size());
+        while (itr.hasPrevious()) {
+            int i = itr.previous();
+            if (PrioritizeWords.get(i) != null) {
+                for (int j = 0; j < PrioritizeWords.get(i).size(); j++) {
+                    result.add(PrioritizeWords.get(i).get(j));
+                    if (result.size() == 5) {
+                        flag = true;
+                        break;
+                    }
+                }
+            }
+            if (flag)
+                break;
+        }
+
+
+        /*
+        while (true){
+            List<Integer> keys = new ArrayList<>(PrioritizeWords.keySet());
+            ListIterator<Integer> itr = keys.listIterator(keys.size());
+            while (itr.hasPrevious()) {
+                int i = itr.previous();
+                if(PrioritizeWords.get(i) != null){//moshkel inke 3 bar apple bezani baad dige to 5 ta aval namiad az inja hast
+                    for (int j = 0; j < PrioritizeWords.get(i).size(); j++) {
+                        result.add(PrioritizeWords.get(i).get(j));
+                        if (result.size() == 5) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                }
+                if (flag)
+                    break;
+            }
+
+
+//            for(Iterator<Integer> it = PrioritizeWords.keySet().iterator(); it.hasNext();){
+//                int i = it.next();
+//                if(PrioritizeWords.get(i) != null){//moshkel inke 3 bar apple bezani baad dige to 5 ta aval namiad az inja hast
+//                    for (int j = 0; j < PrioritizeWords.get(i).size(); j++) {
+//                        result.add(PrioritizeWords.get(i).get(j));
+//                        if (result.size() == 5) {
+//                            flag = true;
+//                            break;
+//                        }
+//                    }
+//                }
+//                if (flag)
+//                    break;
+//            }
+            break;
+        }
+
+         */
+
+        /*
+        while (true){
+//            System.out.println(PrioritizeWords.keySet().size());
+            for(int i=PrioritizeWords.keySet().size()-1;i>=0;i--){
+                Iterator<Integer> it = PrioritizeWords.keySet().iterator();
+                if(PrioritizeWords.get(i) != null){//moshkel inke 3 bar apple bezani baad dige to 5 ta aval namiad az inja hast
+                    System.out.println(it.next());
+                    for (int j = 0; j < PrioritizeWords.get(i).size(); j++) {
+                        result.add(PrioritizeWords.get(i).get(j));
+                        if (result.size() == 5) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                }
+//                for(String word:PrioritizeWords.get(i)){
+//                    result.add(word);
+//                    if(result.size() == 5){
+//                        flag = true;
+//                        break;
+//                    }
+//                }
+                if (flag)
+                    break;
+            }
+            break;
+        }
+         */
+        return result;
     }
 }
