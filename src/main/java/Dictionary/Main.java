@@ -7,8 +7,10 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Main extends Application{
-     ;
-    static Trie reversedTrie ;
+//    static Trie reversedTrie = new Trie();
+//    static Trie originalTrie = new Trie();
+
+    static Trie reversedTrie;
     static Trie originalTrie;
 
     static ObjectInputStream originalIn;
@@ -47,7 +49,6 @@ public class Main extends Application{
 //            }
 //            reversedTrie.addWord(reversedWord);
 //        }
-//
 
 //        originalTrie.printAllTrie();
 //        reversedTrie.printAllTrie();

@@ -3,16 +3,19 @@ package Dictionary;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class TrieGUI {
     public static void mainScene(Stage stage){
@@ -25,6 +28,10 @@ public class TrieGUI {
         stage.setMaxHeight(700);
         stage.setMaxWidth(400);
 
+        Image image=new Image("search-icon.png");
+        ImageView  imageView=new ImageView();
+        imageView.setImage(image);
+
         Label wordLabel = new Label("Word: ");
         wordLabel.setCursor(Cursor.TEXT);
         wordLabel.setTooltip(new Tooltip("WORD"));
@@ -32,40 +39,65 @@ public class TrieGUI {
         TextField wordTextField = new TextField();
         wordTextField.setTooltip(new Tooltip("Enter your word..."));
 
+
         Label tempLabel = new Label();
+
+        Button submitButton = new Button("Submit");
+        submitButton.setCursor(Cursor.HAND);
+        submitButton.setTooltip(new Tooltip("Press to Submit"));
+
+        AtomicInteger temp = new AtomicInteger();
+        AtomicReference<String> word = new AtomicReference<>("");
+
+        submitButton.setOnAction(actionEvent -> {
+            if(temp.get() == 2){
+                Main.originalTrie.updateFreq(String.valueOf(word));
+            }
+        });
 
         wordTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             newValue = newValue.toLowerCase();
-            int temp = Main.originalTrie.isExist(newValue);
-            if(temp == 0){
-                tempLabel.setText(ListToString(Correction.correctionSuggestion(newValue), temp));
+            newValue = newValue.replaceAll("[^a-zA-Z0-9]", "");
+            wordTextField.setText(newValue);
+            temp.set(Main.originalTrie.isExist(newValue));
+            word.set(newValue); //for update frequency
+            if(temp.get() == 0){
+                tempLabel.setText(ListToString(Correction.correctionSuggestion(newValue), temp.get()));
                 scene.getStylesheets().clear();
                 scene.getStylesheets().add("styleError.css");
-            }else if(temp == 1){
+            }else if(temp.get() == 1){
                 tempLabel.setText("");
                 if(!newValue.equals("")) {
                     AutoComplete.getLastNode(newValue);
-                    tempLabel.setText(ListToString(AutoComplete.fiveRecentWords(), temp));
+                    tempLabel.setText(ListToString(AutoComplete.fiveRecentWords(), temp.get()));
                 }
                 scene.getStylesheets().clear();
-            }else if(temp == 2){
+            }else if(temp.get() == 2){
                 AutoComplete.getLastNode(newValue);
-                tempLabel.setText(ListToString(AutoComplete.fiveRecentWords(), temp));
+                tempLabel.setText(ListToString(AutoComplete.fiveRecentWords(), temp.get()));
                 scene.getStylesheets().clear();
                 scene.getStylesheets().add("styleSuccess.css");
             }
         });
 
-        HBox wordHBox = new HBox(wordLabel, wordTextField);
+        HBox wordInputHBox = new HBox(imageView, wordTextField);
+        wordInputHBox.setAlignment(Pos.CENTER);
+
+        HBox wordHBox = new HBox(wordInputHBox, submitButton);
         wordHBox.setAlignment(Pos.CENTER);
-        wordHBox.setSpacing(20);
+        wordHBox.setSpacing(15);
 
-        root.setStyle("-fx-font-size: 18;");
-
+        root.setStyle("-fx-font-size: 18;-fx-background-color: #c2c2c2;");
+//        HBox toolbar = new HBox();
+//        toolbar.setMaxHeight(75);
+//        toolbar.setStyle("-fx-background-color: gray");
+//        toolbar.getChildren().setAll(wordHBox);
 
         root.getChildren().setAll(wordHBox, tempLabel);
+//        root.getChildren().setAll(toolbar, tempLabel);
         root.setAlignment(Pos.CENTER);
         root.setSpacing(15);
+//        root.setPadding(new Insets(32, 0, 0, 32));
 
         stage.setScene(scene);
     }
