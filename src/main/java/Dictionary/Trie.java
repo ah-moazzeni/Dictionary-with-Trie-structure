@@ -57,8 +57,7 @@ public class Trie implements Serializable {
                 return 0;
             }
             if (i == word.length() - 1 && root.letters.get(index).getFinalLetter() ) {
-                System.out.println(root.letters.get(index).getFrequency());
-//                root.letters.get(index).updateFrequency();
+//                System.out.println(root.letters.get(index).getFrequency());
                 return 2;
             }
             root = root.letters.get(index);
@@ -70,9 +69,8 @@ public class Trie implements Serializable {
         for (int i = 0; i < word.length(); i++) {
             int index = word.charAt(i);
             index -= 97;
-            if (i == word.length() - 1 && root.letters.get(index).getFinalLetter() ) {
+            if (i == word.length() - 1 && root.letters.get(index).getFinalLetter())
                 root.letters.get(index).updateFrequency();
-            }
             root = root.letters.get(index);
         }
     }

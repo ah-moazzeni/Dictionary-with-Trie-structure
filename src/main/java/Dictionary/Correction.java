@@ -25,7 +25,6 @@ public class Correction {
                         res.add(new Word(i.getFrequency(), distance(temp, word), reversedWord));
                     } else {
                         res.add(new Word(i.getFrequency(), distance(temp, word), temp));
-
                     }
                 }
                 findAllWords(i, characters, res, word, reverse);
@@ -50,12 +49,10 @@ public class Correction {
                 root = root.letters.get(index);
                 characters.push(root.getLetter());
             }
-
         }
         if(secondList){
             characters.pop();
             findAllWords(second, characters, res, word, reverse);
-
         }
         else {
             findAllWords(root, characters, res, word, reverse);
@@ -126,7 +123,6 @@ public class Correction {
                     }
                 }
                 if (!flag){
-
                     result.add(res.get(i).word);
                 }
                 if (i == 4-size) {break;}

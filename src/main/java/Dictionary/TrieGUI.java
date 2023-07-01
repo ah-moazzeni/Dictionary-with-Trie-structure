@@ -88,16 +88,10 @@ public class TrieGUI {
         wordHBox.setSpacing(15);
 
         root.setStyle("-fx-font-size: 18;-fx-background-color: #c2c2c2;");
-//        HBox toolbar = new HBox();
-//        toolbar.setMaxHeight(75);
-//        toolbar.setStyle("-fx-background-color: gray");
-//        toolbar.getChildren().setAll(wordHBox);
 
         root.getChildren().setAll(wordHBox, tempLabel);
-//        root.getChildren().setAll(toolbar, tempLabel);
         root.setAlignment(Pos.CENTER);
         root.setSpacing(15);
-//        root.setPadding(new Insets(32, 0, 0, 32));
 
         stage.setScene(scene);
     }
