@@ -12,8 +12,7 @@ public class FileHandling {
         BufferedReader reader;
         ArrayList<String> temp = new ArrayList<>();
         try {
-            reader = new BufferedReader(new FileReader("C:\\Users\\ASUS\\Desktop\\University\\Semester 4\\DS\\Project\\Dictionary-with-Trie-structure\\src\\main\\java\\Dictionary\\words.txt"));
-//            reader = new BufferedReader(new FileReader("/home/ah_moazzeni/Desktop/Dictionary-with-Trie-structure/src/main/java/Dictionary/words.txt"));
+            reader = new BufferedReader(new FileReader("words.txt"));
 
             String line = reader.readLine();
             temp.add(line);
