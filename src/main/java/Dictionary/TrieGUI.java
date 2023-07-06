@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -45,6 +46,7 @@ public class TrieGUI {
         Button submitButton = new Button("Submit");
         submitButton.setCursor(Cursor.HAND);
         submitButton.setTooltip(new Tooltip("Press to Submit"));
+        submitButton.setDisable(true);
 
         AtomicInteger temp = new AtomicInteger();
         AtomicReference<String> word = new AtomicReference<>("");
@@ -52,6 +54,8 @@ public class TrieGUI {
         submitButton.setOnAction(actionEvent -> {
             if(temp.get() == 2){
                 Main.originalTrie.updateFreq(String.valueOf(word));
+                wordTextField.setText("");
+                submitButton.setDisable(true);
             }
         });
 
@@ -61,15 +65,19 @@ public class TrieGUI {
             wordTextField.setText(newValue);
             temp.set(Main.originalTrie.isExist(newValue));
             word.set(newValue); //for update frequency
+            if(Objects.equals(newValue, ""))
+                submitButton.setDisable(true);
             if(temp.get() == 0){
                 tempLabel.setText(ListToString(Correction.correctionSuggestion(newValue), temp.get()));
                 scene.getStylesheets().clear();
                 scene.getStylesheets().add("styleError.css");
+                submitButton.setDisable(true);
             }else if(temp.get() == 1){
                 tempLabel.setText("");
                 if(!newValue.equals("")) {
                     AutoComplete.getLastNode(newValue);
                     tempLabel.setText(ListToString(AutoComplete.fiveRecentWords(), temp.get()));
+                    submitButton.setDisable(true);
                 }
                 scene.getStylesheets().clear();
             }else if(temp.get() == 2){
@@ -77,6 +85,7 @@ public class TrieGUI {
                 tempLabel.setText(ListToString(AutoComplete.fiveRecentWords(), temp.get()));
                 scene.getStylesheets().clear();
                 scene.getStylesheets().add("styleSuccess.css");
+                submitButton.setDisable(false);
             }
         });
 
