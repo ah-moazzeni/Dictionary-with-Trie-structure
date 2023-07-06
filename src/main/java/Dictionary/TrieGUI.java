@@ -57,7 +57,7 @@ public class TrieGUI {
 
         wordTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             newValue = newValue.toLowerCase();
-            newValue = newValue.replaceAll("[^a-zA-Z0-9]", "");
+            newValue = newValue.replaceAll("[^a-zA-Z]", "");
             wordTextField.setText(newValue);
             temp.set(Main.originalTrie.isExist(newValue));
             word.set(newValue); //for update frequency
